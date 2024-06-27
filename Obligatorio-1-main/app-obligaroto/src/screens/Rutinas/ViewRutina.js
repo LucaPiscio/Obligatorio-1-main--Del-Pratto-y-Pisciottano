@@ -81,7 +81,7 @@ const ViewRutina = ({navigation}) => {
                             </View>
                             <View style={styles.presenterView}>
                                 <MyText 
-                                    text= {`Cantidad: ${!rutinaData ? '' : rutinaData.cantidsad}`} 
+                                    text= {`Cantidad: ${!rutinaData ? '' : rutinaData.cantidad}`} 
                                     style= {styles.presenterText}
                                 />
                             </View>
