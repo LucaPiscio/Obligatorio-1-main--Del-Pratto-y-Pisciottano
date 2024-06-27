@@ -26,6 +26,11 @@ const HomeScreen = ({navigation}) =>
                                     btnColor='grey'
                                     btnIcon='user-circle'
                                     customPress={ () => navigation.navigate('HomeEjercicio')}/>
+                                <MyButton 
+                                    title='Rutinas'
+                                    btnColor='red'
+                                    btnIcon='user-circle'
+                                    customPress={ () => navigation.navigate('HomeRutina')}/>
                             </ScrollView>
                         </View>
                     </View>

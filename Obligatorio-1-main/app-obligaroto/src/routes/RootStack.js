@@ -28,6 +28,12 @@ import UpdateEjercicio from '../screens/Ejercicio/UpdateEjercicio';
 import DeleteEjercicio from '../screens/Ejercicio/DeleteEjercicio';
 import ViewEjercicio from '../screens/Ejercicio/ViewEjercicio';
 import ViewAllEjercicios from '../screens/Ejercicio/ViewAllEjercicios';
+import HomeRutina from '../screens/HomeRutina';
+import RegisterRutina from '../screens/Rutinas/RegisterRutina';
+import DeleteRutina from '../screens/Rutinas/DeleteRutina';
+import updateRutina from '../screens/Rutinas/UpdateRutina';
+import ViewRutina from '../screens/Rutinas/ViewRutina';
+import ViewAllRutinas from '../screens/Rutinas/ViewAllRutinas';
 
 const Stack = createStackNavigator();
 const RootStack = () => 
@@ -61,6 +67,12 @@ const RootStack = () =>
                     <Stack.Screen name='DeleteEjercicio' component={DeleteEjercicio} options={{title: 'Eliminacion de Ejercicios'}}/>
                     <Stack.Screen name='ViewEjercicio' component={ViewEjercicio} options={{title: 'Ver Maquina'}}/>
                     <Stack.Screen name='ViewAllEjercicios' component={ViewAllEjercicios} options={{title: 'Ver todos los Ejercicios'}}/>
+                    <Stack.Screen name='HomeRutina' component={HomeRutina} options={{title:'Rutinas'}}/>
+                    <Stack.Screen name='RegisterRutina' component={RegisterRutina} options={{title: 'Registro de Rutinas'}}/>
+                    <Stack.Screen name='DeleteRutina' component={DeleteRutina} options={{title: 'Eliminacion de Rutina'}}/>
+                    <Stack.Screen name='UpdateRutina' component={updateRutina} options={{title: 'Actualizacion de Rutina'}}/>
+                    <Stack.Screen name='ViewRutina' component={ViewRutina} options={{title: 'Ver Rutina'}}/>
+                    <Stack.Screen name='ViewAllRutinas' component={ViewAllRutinas} options={{title: 'Ver todas las Rutinas'}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         );   
