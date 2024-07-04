@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from "react-native";
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MyText from "../../../components/MyText";
 import MyInputText from "../../../components/MyInputText";
@@ -62,10 +62,17 @@ const ViewTipoMaquina = ({navigation}) => {
                                 />
                             </View>
                             <View style={styles.presenterView}>
-                                <MyText 
-                                    text= {`Foto: ${!tipomaquinaData ? '' : tipomaquinaData.fotoMaq}`} 
-                                    style= {styles.presenterText}
-                                />
+                                {tipomaquinaData && tipomaquinaData.fotoMaq ? (
+                                    <Image
+                                        source={{ uri: tipomaquinaData.fotoMaq }}
+                                        style={styles.image}
+                                    />
+                                ) : (
+                                    <MyText
+                                        text='Foto no disponible'
+                                        style={styles.presenterText}
+                                    />
+                                )}
                             </View>
                         </KeyboardAvoidingView>
                     </ScrollView>
@@ -109,5 +116,11 @@ const styles = StyleSheet.create({
         color: 'black',
         alignContent: 'center',
         alignItems: 'center'
+    },
+    image: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center',
+        marginTop: 20
     }
 });

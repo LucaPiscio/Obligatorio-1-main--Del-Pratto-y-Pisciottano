@@ -1,5 +1,6 @@
-import React, {useState} from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert } from "react-native";
+import React, {useState, useEffect} from "react";
+import { StyleSheet, View, SafeAreaView, ScrollView, KeyboardAvoidingView, Alert, Image, Platform } from "react-native";
+import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MyInputText from "../../../components/MyInputText";
 import MySingleButton from "../../../components/MySingleButton";
@@ -7,6 +8,17 @@ import MySingleButton from "../../../components/MySingleButton";
 const RegisterTipoMaquina = ({navigation}) => {
     const [tipoMaq, setTipoMaq] = useState('');
     const [fotoMaq, setFotoMaq] = useState('');
+
+    useEffect(() => {
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                if (status !== 'granted') {
+                    alert('Se necesitan permisos para acceder a la galería de fotos.');
+                }
+            }
+        })();
+    }, []);
 
     const clearData = () => {
         setTipoMaq('');
@@ -47,6 +59,21 @@ const RegisterTipoMaquina = ({navigation}) => {
         }
     };
 
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setFotoMaq(result.assets[0].uri); 
+        }
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.viewContainer}>
@@ -59,12 +86,11 @@ const RegisterTipoMaquina = ({navigation}) => {
                                 style={styles.nameInput}
                                 value={tipoMaq}
                             />
-                            <MyInputText
-                                placeholder='Foto de la Tipo de Maquina'
-                                onChangeText={setFotoMaq}
-                                style={styles.nameInput}
-                                value={fotoMaq}
+                            <MySingleButton
+                                title='Seleccionar Foto'
+                                customPress={pickImage} 
                             />
+                            {fotoMaq && <Image source={{ uri: fotoMaq }} style={{ width: 200, height: 200, alignSelf: 'center' }} />}
                             <MySingleButton
                                 title='Guardar Tipo de Maquina'
                                 customPress={registerTipoMaquina}

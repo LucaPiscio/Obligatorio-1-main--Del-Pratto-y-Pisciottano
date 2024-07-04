@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { StyleSheet, View, SafeAreaView, FlatList, Alert } from "react-native";
+import { StyleSheet, View, SafeAreaView, FlatList, Alert, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MyText from "../../../components/MyText";
 
@@ -51,16 +51,19 @@ const ViewAllTipoMaquinas = ({navigation}) =>
                          text= {item.tipoMaq} 
                          style={styles.text}
                          />
-                         <MyText
-                         text = 'Foto:'
-                         style = {styles.text}
-                         />
+                        {item.fotoMaq ? (
+                            <Image
+                                source={{ uri: item.fotoMaq }}
+                                style={styles.image} 
+                            />
+                        ) : (
+                            <MyText
+                                text='Foto no disponible'
+                                style={styles.text}
+                            />
+                        )}
                         <MyText
-                         text= {item.fotoMaq} 
-                         style={styles.text}
-                         />
-                        <MyText
-                         text = '------------------------------'
+                         text = '-------------------------------------------------------------------------------------'
                          style = {styles.text}
                          />
                     </View>
@@ -111,5 +114,12 @@ const styles = StyleSheet.create({
         color: 'black',
         alignContent: 'center',
         alignItems: 'center'
+    },
+    image: {
+        width: 200,
+        height: 200, 
+        alignSelf: 'center', 
+        marginTop: 10, 
+        borderRadius: 10 
     }
 });
